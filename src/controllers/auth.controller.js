@@ -144,7 +144,7 @@ export async function onboard(req, res) {
         name: updatedUser.fullName,
         image: updatedUser.profilePic || "",
       });
-      console.log(Stream user updated after onboarding for ${updatedUser.fullName});
+      console.log(`Stream user updated after onboarding for ${updatedUser.fullName}`);
     } catch (streamError) {
       console.error("Error updating Stream user during onboarding:", streamError.message);
     }
