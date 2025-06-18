@@ -18,7 +18,7 @@ const __dirname = path.resolve();
 app.use(
   cors({
     origin: "https://pslchatbox.netlify.app",
-    credentials: true, // allow frontend to send cookies
+    credentials: true // allow frontend to send cookies
   })
 );
 
