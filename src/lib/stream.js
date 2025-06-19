@@ -5,26 +5,27 @@ const apiKey = process.env.STEAM_API_KEY;
 const apiSecret = process.env.STEAM_API_SECRET;
 
 if (!apiKey || !apiSecret) {
-  console.error("Stream API key or Secret is missing");
+  throw new Error("Stream API Key and Secret must be defined in .env");
 }
 
 const streamClient = StreamChat.getInstance(apiKey, apiSecret);
 
 export const upsertStreamUser = async (userData) => {
   try {
-    await streamClient.upsertUsers([userData]);
-    return userData;
+    const response = await streamClient.upsertUsers([userData]);
+    return response;
   } catch (error) {
-    console.error("Error upserting Stream user:", error);
+    console.error("❌ Error upserting Stream user:", error.message);
+    return null;
   }
 };
 
-export const generateStreamToken = (userId) => {
+export const generateStreamToken = async (userId) => {
   try {
-    // ensure userId is a string
     const userIdStr = userId.toString();
     return streamClient.createToken(userIdStr);
   } catch (error) {
-    console.error("Error generating Stream token:", error);
+    console.error("❌ Error generating Stream token:", error.message);
+    return null;
   }
 };
